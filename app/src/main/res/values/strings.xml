@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">nossa primeira app noite</string>
+    <string name="ola">Olá mundo, tem dev preguiçoso por ai</string>
+    <string name="bt_dispara">Disparar</string>
+</resources>
