@@ -85,8 +85,8 @@ public class SegundaActivity extends AppCompatActivity
             LinearLayoutManager llhm2 = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
             GridLayoutManager glm = new GridLayoutManager(this,3);
             StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-            rv.setLayoutManager(llhm);
-            rv2.setLayoutManager(llm);
+            rv.setLayoutManager(llm);
+            rv2.setLayoutManager(llhm);
 
             TodoAdapter todoAdapter = new TodoAdapter(todos,0);
             TodoAdapter todoAdapter2 = new TodoAdapter(todos.subList(3,7), R.layout.activity_detalhe_todo);

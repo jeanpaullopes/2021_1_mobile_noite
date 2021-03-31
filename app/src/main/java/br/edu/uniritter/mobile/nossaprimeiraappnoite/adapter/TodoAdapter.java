@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import br.edu.uniritter.mobile.nossaprimeiraappnoite.R;
 import br.edu.uniritter.mobile.nossaprimeiraappnoite.model.Todo;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
-    private List<Parcelable> listaTodos;
+    private List<Todo> listaTodos;
     private int layout;
 
     public class TodoViewHolder extends RecyclerView.ViewHolder {
@@ -29,11 +30,11 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
             this.viewTodo = itemView;
         }
     }
-    public TodoAdapter(List<Parcelable> todos, int layout) {
+    public TodoAdapter(List<Todo> todos, int layout) {
         this.listaTodos = todos;
         this.layout = layout;
         if (this.layout == 0) {
-            this.layout =  R.layout.layout;
+            this.layout =  R.layout.layout_user;
         }
     }
 
@@ -53,16 +54,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
             //tv.setText(obj.getId()+"");
             //tv = holder.viewTodo.findViewById(R.id.tvIdUser);
             //tv.setText(obj.getUserId()+"");
-            tv = holder.viewTodo.findViewById(R.id.tvTitle);
-            tv.setText(obj.getTitle());
-            CheckBox cb = holder.viewTodo.findViewById(R.id.cbCompleted);
-            cb.setChecked(obj.isCompleted());
-            if (layout == R.layout.activity_detalhe_todo) {
-                Button bt = holder.viewTodo.findViewById(R.id.button4);
+            if (this.layout != R.layout.layout_user) {
+                tv = holder.viewTodo.findViewById(R.id.tvTitle);
+                tv.setText(obj.getTitle());
+                CheckBox cb = holder.viewTodo.findViewById(R.id.cbCompleted);
+                cb.setChecked(obj.isCompleted());
+            }
+            if (layout == R.layout.layout_user) {
+                CardView bt = holder.viewTodo.findViewById(R.id.cardUser);
+                bt.setTag(obj);
                 bt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Button btn = (Button) v;
+                        CardView btn = (CardView) v;
                         Todo todo = (Todo) btn.getTag();
                         Intent intent = new Intent(holder.viewTodo.getContext(), DetalheTodoActivity.class);
 
