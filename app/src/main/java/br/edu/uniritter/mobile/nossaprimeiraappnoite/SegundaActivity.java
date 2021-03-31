@@ -1,15 +1,14 @@
 package br.edu.uniritter.mobile.nossaprimeiraappnoite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.strictmode.DiskWriteViolation;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.uniritter.mobile.nossaprimeiraappnoite.adapter.TodoAdapter;
 import br.edu.uniritter.mobile.nossaprimeiraappnoite.model.Todo;
 
 public class SegundaActivity extends AppCompatActivity
@@ -58,7 +58,6 @@ public class SegundaActivity extends AppCompatActivity
 
         // Add the request to the RequestQueue.
         queue.add(jsonArrayRequest);
-        Toast.makeText(this,"qtd:"+todos.size(),Toast.LENGTH_LONG).show();
 
 
     }
@@ -73,9 +72,27 @@ public class SegundaActivity extends AppCompatActivity
                         json.getInt("id"),
                         json.getString("title"),
                         json.getBoolean("completed"));
+
                 todos.add(obj);
 
             }
+            Toast.makeText(this,"qtd:"+todos.size(),Toast.LENGTH_LONG).show();
+
+            RecyclerView rv = findViewById(R.id.rvTodos);
+            RecyclerView rv2 = findViewById(R.id.rvTodos2);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            LinearLayoutManager llhm = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+            LinearLayoutManager llhm2 = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+            GridLayoutManager glm = new GridLayoutManager(this,3);
+            StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+            rv.setLayoutManager(llhm);
+            rv2.setLayoutManager(llm);
+
+            TodoAdapter todoAdapter = new TodoAdapter(todos,0);
+            TodoAdapter todoAdapter2 = new TodoAdapter(todos.subList(3,7), R.layout.activity_detalhe_todo);
+            rv.setAdapter(todoAdapter);
+            rv2.setAdapter(todoAdapter2);
+            /*
             Toast.makeText(this,"qtd:"+todos.size(),Toast.LENGTH_LONG).show();
             LinearLayout ll = findViewById(R.id.layoutVerticalItens);
             for(Todo obj1 : todos) {
@@ -98,6 +115,7 @@ public class SegundaActivity extends AppCompatActivity
                 });
                 ll.addView(bt);
             }
+            */
 
 
         } catch (JSONException e) {

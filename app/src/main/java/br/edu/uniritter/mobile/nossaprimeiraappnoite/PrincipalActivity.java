@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import br.edu.uniritter.mobile.nossaprimeiraappnoite.model.Address;
+import br.edu.uniritter.mobile.nossaprimeiraappnoite.model.Geo;
+import br.edu.uniritter.mobile.nossaprimeiraappnoite.model.User;
+
 public class PrincipalActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +20,11 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         Button joao = (Button) findViewById(R.id.button2);
 
+
+        User user = new User(1,"jean","jean.paul@uniritter.edu.br",null);
+        Geo geo = new Geo(-29.2323f,-50.9097f);
+        Address add = new Address("Rua do cardeal dom eustáquio", "394", "Gravatai","9999999",geo);
+        user.address = add;
         //btn.setOnClickListener(this::abreSegundaActivity);
 
         joao.setOnClickListener(new View.OnClickListener() {

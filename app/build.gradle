@@ -33,11 +33,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     //biblioteca para consumo de API rest
     implementation 'com.android.volley:volley:1.2.0'
+
+    //biblioteca para carregar imagens em imageViews
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
