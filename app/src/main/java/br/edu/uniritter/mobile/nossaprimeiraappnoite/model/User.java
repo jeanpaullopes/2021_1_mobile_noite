@@ -21,7 +21,10 @@ public class User implements Parcelable {
         name = parcel.readString();
         email = parcel.readString();
 
-        //parcel.writeParcelable(this.address);
+        // no caso de usar
+        // //parcel.writeParcelable(this.address);
+        //leria assim
+        // this.address = parcel.readParcelable();
         Address add = new Address(
         parcel.readString(),
         parcel.readString(),
@@ -33,6 +36,7 @@ public class User implements Parcelable {
                 parcel.readFloat());
 
         this.address = add;
+
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

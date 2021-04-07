@@ -20,7 +20,7 @@ import br.edu.uniritter.mobile.nossaprimeiraappnoite.R;
 import br.edu.uniritter.mobile.nossaprimeiraappnoite.model.Todo;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
-    private List<Todo> listaTodos;
+    private List<Parcelable> listaTodos;
     private int layout;
 
     public class TodoViewHolder extends RecyclerView.ViewHolder {
@@ -30,7 +30,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
             this.viewTodo = itemView;
         }
     }
-    public TodoAdapter(List<Todo> todos, int layout) {
+    public TodoAdapter(List<Parcelable> todos, int layout) {
         this.listaTodos = todos;
         this.layout = layout;
         if (this.layout == 0) {
@@ -41,7 +41,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     @NonNull
     @Override
     public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(this.layout, parent, false);
+        View v = null;
+        if (listaTodos.get(0) instanceof Todo) {
+            v = LayoutInflater.from(parent.getContext()).inflate(this.layout, parent, false);
+        }
         return new TodoViewHolder(v);
     }
 
