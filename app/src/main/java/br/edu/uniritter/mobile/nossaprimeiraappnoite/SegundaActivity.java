@@ -1,16 +1,19 @@
 package br.edu.uniritter.mobile.nossaprimeiraappnoite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +54,17 @@ public class SegundaActivity extends AppCompatActivity
         this.presenter =  new SegundaActivityPresenter(this);
         //Toast.makeText(this,"olá "+txt,Toast.LENGTH_LONG).show();
 
+        Log.d("SegundaActivity", "fim");
 
+        SwipeRefreshLayout str = findViewById(R.id.SwipeSegAct);
+        str.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                str.setRefreshing(true);
+                Log.d("SegundaActivity", "vou dar o start()");
+                presenter.start();
+            }
+        });
 
     }
 
@@ -68,9 +81,11 @@ public class SegundaActivity extends AppCompatActivity
         rv2.setLayoutManager(llhm);
 
         TodoAdapter todoAdapter = new TodoAdapter(lista,0);
-        TodoAdapter todoAdapter2 = new TodoAdapter(lista.subList(3,7), R.layout.activity_detalhe_todo);
+        TodoAdapter todoAdapter2 = new TodoAdapter(lista.subList(3,7), R.layout.layout);
         rv.setAdapter(todoAdapter);
         rv2.setAdapter(todoAdapter2);
+
+
     }
 
     @Override
@@ -87,6 +102,26 @@ public class SegundaActivity extends AppCompatActivity
     public void mostraToast(String msg) {
         Toast.makeText(this.getApplicationContext(),msg,Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void stopRefreshing() {
+        SwipeRefreshLayout str = findViewById(R.id.SwipeSegAct);
+        str.setRefreshing(false);
+    }
+
+    // aqui vai atender o onclick definido no layout
+    public void cardClick(View v) {
+        CardView btn = (CardView) v;
+        Todo todo = (Todo) btn.getTag();
+        Intent intent = new Intent(v.getContext(), DetalheTodoActivity.class);
+
+        // adicional para incluir dados para a proxima activity
+        intent.putExtra("objTodo", todo);
+        // lança intent para o SO chamar a activity
+        v.getContext().startActivity(intent);
+    }
+
+
 
     @Override
     public Context getContexto() {

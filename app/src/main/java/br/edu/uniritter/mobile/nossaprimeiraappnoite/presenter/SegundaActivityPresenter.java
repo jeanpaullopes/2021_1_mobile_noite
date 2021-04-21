@@ -31,7 +31,7 @@ public class SegundaActivityPresenter implements Response.Listener<JSONArray>,
     public SegundaActivityPresenter(SegundaActivityContrato.SegundaActivityView view) {
         this.view = view;
         this.lista = TodoService.getTodos();
-        start();
+        //start();
     }
     @Override
     public void start() {
@@ -66,6 +66,8 @@ public class SegundaActivityPresenter implements Response.Listener<JSONArray>,
 
     @Override
     public void onResponse(JSONArray response) {
+        Log.d("SegundaPresenter", "no onResponse()");
+
         this.lista = new ArrayList<>();
         try {
 
@@ -79,7 +81,10 @@ public class SegundaActivityPresenter implements Response.Listener<JSONArray>,
                 lista.add(obj);
 
             }
+            Log.d("SegundaPresenter", "vai dar o bindLista()");
+
             view.bindLista(lista);
+            view.stopRefreshing();
 
         } catch (JSONException e) {
             Log.e("erro",e.getMessage());

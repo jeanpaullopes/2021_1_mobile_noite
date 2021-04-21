@@ -15,6 +15,7 @@ public interface SegundaActivityContrato {
         public void bindListaAdd(List<Address> list);
         public void bindListaUser(List<User> lista);
         public void mostraToast(String msg);
+        public void stopRefreshing();
         public Context getContexto();
     }
 
