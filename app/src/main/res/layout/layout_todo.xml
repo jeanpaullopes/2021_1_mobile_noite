@@ -5,8 +5,8 @@
             name="todo"
             type="br.edu.uniritter.mobile.nossaprimeiraappnoite.model.Todo" />
         <variable
-            name="activity"
-            type="br.edu.uniritter.mobile.nossaprimeiraappnoite.SegundaActivity" />
+            name="adapter"
+            type="br.edu.uniritter.mobile.nossaprimeiraappnoite.adapter.TodoAdapter" />
     </data>
 <LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#E3DEDE"
         app:contentPadding="5dp"
-        android:onClick="@{activity::cardClick}"
+        android:onClick="@{(view) -> adapter.cardClick(view)}"
+        android:tag="@{todo}"
         >
 
         <LinearLayout

@@ -109,17 +109,6 @@ public class SegundaActivity extends AppCompatActivity
         str.setRefreshing(false);
     }
 
-    // aqui vai atender o onclick definido no layout
-    public void cardClick(View v) {
-        CardView btn = (CardView) v;
-        Todo todo = (Todo) btn.getTag();
-        Intent intent = new Intent(v.getContext(), DetalheTodoActivity.class);
-
-        // adicional para incluir dados para a proxima activity
-        intent.putExtra("objTodo", todo);
-        // lança intent para o SO chamar a activity
-        v.getContext().startActivity(intent);
-    }
 
 
 

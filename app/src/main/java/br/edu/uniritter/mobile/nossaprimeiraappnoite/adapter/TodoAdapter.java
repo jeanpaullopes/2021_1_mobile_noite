@@ -98,6 +98,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                 Log.w("TodoAdapter",position+" obj:"+obj);
                 if (obj != null) {
                     holder.viewTodo2.setTodo(obj);
+                    //aqui vai fazer o bind do adapter para poder chamar o método onCLick
+                    holder.viewTodo2.setAdapter(this);
                 }
                 // aqui não tem mais o .findViewById() então comentei tudo
                 // todo foi para o layout_todo e para o método cardClick
@@ -123,6 +125,18 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         }
 
 
+    }
+    // aqui vai atender o onclick definido no layout
+    public void cardClick(View v) {
+        Log.w("onclick","no card onclick");
+        CardView btn = (CardView) v;
+        Todo todo = (Todo) btn.getTag();
+        Intent intent = new Intent(v.getContext(), DetalheTodoActivity.class);
+
+        // adicional para incluir dados para a proxima activity
+        intent.putExtra("objTodo", todo);
+        // lança intent para o SO chamar a activity
+        v.getContext().startActivity(intent);
     }
 
 
